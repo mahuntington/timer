@@ -1,4 +1,4 @@
-let startTime;
+let startTime = 0;
 let windowInterval;
 
 const padDigits = (value) => {
@@ -17,13 +17,11 @@ const formatTime = (total) => {
 }
 
 const displayTime = () => {
-    // console.log(Date.now()-startTime);
-    const timeString = formatTime(Math.floor((Date.now()-startTime)/1000));
-    document.querySelector('h1').innerHTML = timeString;
+    startTime++;
+    document.querySelector('h1').innerHTML = formatTime(startTime);
 }
 
 document.querySelector('.btn-primary').addEventListener('click', (event) => {
-    startTime=Date.now();
     document.querySelector('.btn-primary').disabled=true;
     document.querySelector('.btn-secondary').disabled=false;
     windowInterval = window.setInterval(displayTime,1000)
