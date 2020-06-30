@@ -1,11 +1,19 @@
 let startTime;
 let windowInterval;
 
+const padDigits = (value) => {
+    if(value < 10){
+        return '0'+value;
+    } else {
+        return value;
+    }
+}
+
 const formatTime = (total) => {
     const hours = Math.floor(total/60/60);
     const minutes = Math.floor( (total - (hours*60*60)) / 60 );
     const seconds = total - minutes*60 - hours * 60 * 60;
-    return `${hours}:${minutes}:${seconds}`;
+    return `${padDigits(hours)}:${padDigits(minutes)}:${padDigits(seconds)}`;
 }
 
 const displayTime = () => {
