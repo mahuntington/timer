@@ -24,10 +24,14 @@ const displayTime = () => {
 
 document.querySelector('.btn-primary').addEventListener('click', (event) => {
     startTime=Date.now();
+    document.querySelector('.btn-primary').disabled=true;
+    document.querySelector('.btn-secondary').disabled=false;
     windowInterval = window.setInterval(displayTime,1000)
 })
 
 document.querySelector('.btn-secondary').addEventListener('click', (event) => {
+    document.querySelector('.btn-primary').disabled=false;
+    document.querySelector('.btn-secondary').disabled=true;
     window.clearInterval(windowInterval)
 })
 
