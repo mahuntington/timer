@@ -24,13 +24,21 @@ const displayTime = () => {
 document.querySelector('.btn-primary').addEventListener('click', (event) => {
     document.querySelector('.btn-primary').disabled=true;
     document.querySelector('.btn-secondary').disabled=false;
+    document.querySelector('.btn-danger').disabled=true;
     windowInterval = window.setInterval(displayTime,1000)
 })
 
 document.querySelector('.btn-secondary').addEventListener('click', (event) => {
     document.querySelector('.btn-primary').disabled=false;
     document.querySelector('.btn-secondary').disabled=true;
+    document.querySelector('.btn-danger').disabled=false;
     window.clearInterval(windowInterval)
+})
+
+document.querySelector('.btn-danger').addEventListener('click', (event) => {
+    startTime = 0;
+    document.querySelector('h1').innerHTML = formatTime(startTime);
+    document.querySelector('.btn-danger').disabled=true;
 })
 
 // window.onbeforeunload = function(){
