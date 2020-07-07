@@ -17,11 +17,12 @@ const formatTime = (total) => {
 }
 
 const displayTime = () => {
-    startTime++;
-    document.querySelector('h1').innerHTML = formatTime(startTime);
+    const totalSeconds = Math.floor((Date.now()-startTime)/1000);
+    document.querySelector('h1').innerHTML = formatTime(totalSeconds);
 }
 
 document.querySelector('.btn-primary').addEventListener('click', (event) => {
+    startTime = Date.now();
     document.querySelector('.btn-primary').disabled=true;
     document.querySelector('.btn-secondary').disabled=false;
     document.querySelector('.btn-danger').disabled=true;
