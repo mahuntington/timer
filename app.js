@@ -1,6 +1,13 @@
 let startTime = 0;
 let savedPreviousSeconds = 0;
+let running = false;
 let windowInterval;
+
+const previousSessionAccumulatedSeconds = parseInt(window.localStorage.getItem('savedPreviousSeconds'));
+if(previousSessionAccumulatedSeconds){
+    savedPreviousSeconds = previousSessionAccumulatedSeconds
+}
+
 
 const padDigits = (value) => {
     if(value < 10){
@@ -26,8 +33,15 @@ const displayTime = () => {
     document.querySelector('h1').innerHTML = formatSeconds(totalSeconds);
 }
 
+const updateSavedPreviousSeconds = () => {
+    savedPreviousSeconds += getAccumulatedSeconds(Date.now(), startTime);
+}
+
+document.querySelector('h1').innerHTML = formatSeconds(savedPreviousSeconds);
+
 document.querySelector('.btn-primary').addEventListener('click', (event) => {
     startTime = Date.now();
+    running = true;
     document.querySelector('.btn-primary').disabled=true;
     document.querySelector('.btn-secondary').disabled=false;
     document.querySelector('.btn-danger').disabled=true;
@@ -35,7 +49,8 @@ document.querySelector('.btn-primary').addEventListener('click', (event) => {
 })
 
 document.querySelector('.btn-secondary').addEventListener('click', (event) => {
-    savedPreviousSeconds += getAccumulatedSeconds(Date.now(), startTime);
+    updateSavedPreviousSeconds();
+    running = false;
     document.querySelector('.btn-primary').disabled=false;
     document.querySelector('.btn-secondary').disabled=true;
     document.querySelector('.btn-danger').disabled=false;
@@ -48,6 +63,10 @@ document.querySelector('.btn-danger').addEventListener('click', (event) => {
     document.querySelector('.btn-danger').disabled=true;
 })
 
-// window.onbeforeunload = function(){
-//     return 'Good bye';
-// }
+window.onbeforeunload = function(){
+    if(running){
+        updateSavedPreviousSeconds();
+    }
+    window.localStorage.setItem('savedPreviousSeconds', savedPreviousSeconds);
+    return 'Good bye';
+}
