@@ -1,4 +1,5 @@
 let startTime = 0;
+let savedPreviousSeconds = 0;
 let windowInterval;
 
 const padDigits = (value) => {
@@ -9,16 +10,20 @@ const padDigits = (value) => {
     }
 }
 
-const formatTime = (total) => {
+const formatSeconds = (total) => {
     const hours = Math.floor(total/60/60);
     const minutes = Math.floor( (total - (hours*60*60)) / 60 );
     const seconds = total - minutes*60 - hours * 60 * 60;
     return `${padDigits(hours)}:${padDigits(minutes)}:${padDigits(seconds)}`;
 }
 
+const getAccumulatedSeconds = (newerTime, olderTime) => {
+    return Math.floor((newerTime-olderTime)/1000);
+}
+
 const displayTime = () => {
-    const totalSeconds = Math.floor((Date.now()-startTime)/1000);
-    document.querySelector('h1').innerHTML = formatTime(totalSeconds);
+    const totalSeconds = getAccumulatedSeconds(Date.now(),startTime) + savedPreviousSeconds;
+    document.querySelector('h1').innerHTML = formatSeconds(totalSeconds);
 }
 
 document.querySelector('.btn-primary').addEventListener('click', (event) => {
@@ -30,6 +35,7 @@ document.querySelector('.btn-primary').addEventListener('click', (event) => {
 })
 
 document.querySelector('.btn-secondary').addEventListener('click', (event) => {
+    savedPreviousSeconds += getAccumulatedSeconds(Date.now(), startTime);
     document.querySelector('.btn-primary').disabled=false;
     document.querySelector('.btn-secondary').disabled=true;
     document.querySelector('.btn-danger').disabled=false;
@@ -37,8 +43,8 @@ document.querySelector('.btn-secondary').addEventListener('click', (event) => {
 })
 
 document.querySelector('.btn-danger').addEventListener('click', (event) => {
-    startTime = 0;
-    document.querySelector('h1').innerHTML = formatTime(startTime);
+    savedPreviousSeconds = 0;
+    document.querySelector('h1').innerHTML = formatSeconds(0);
     document.querySelector('.btn-danger').disabled=true;
 })
 
