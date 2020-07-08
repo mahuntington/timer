@@ -1,3 +1,15 @@
+/* TODOs
+- style
+- no hours, just mins/secs
+- set alarm for after certain times have passed
+- pause when not playing with audio api
+- deploy
+- cleanup
+- hook up practice log
+- enable reset on load if there is saved time from before
+- display previous entries
+*/
+
 let startTime = 0;
 let savedPreviousSeconds = 0;
 let running = false;
