@@ -1,13 +1,14 @@
 /* TODOs
-- style
 - no hours, just mins/secs
+- enable reset on load if there is saved time from before
+- style
+- green background for when timer is running
+- display previous entries
 - set alarm for after certain times have passed
 - pause when not playing with audio api
 - deploy
 - cleanup
 - hook up practice log
-- enable reset on load if there is saved time from before
-- display previous entries
 */
 
 let startTime = 0;
