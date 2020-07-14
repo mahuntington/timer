@@ -74,10 +74,10 @@ document.querySelector('.btn-danger').addEventListener('click', (event) => {
     document.querySelector('.btn-danger').disabled=true;
 })
 
-// window.onbeforeunload = function(){
-//     if(running){
-//         updateSavedPreviousSeconds();
-//     }
-//     window.localStorage.setItem('savedPreviousSeconds', savedPreviousSeconds);
-//     return 'Good bye';
-// }
+window.onbeforeunload = function(){
+    if(running){
+        updateSavedPreviousSeconds();
+    }
+    window.localStorage.setItem('savedPreviousSeconds', savedPreviousSeconds);
+    return 'Good bye';
+}
