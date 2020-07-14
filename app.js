@@ -1,9 +1,7 @@
 /* TODOs
-- no hours, just mins/secs
 - enable reset on load if there is saved time from before
-- style
-- green background for when timer is running
 - display previous entries
+- display how many 5/10min blocks have passed
 - set alarm for after certain times have passed
 - pause when not playing with audio api
 - deploy
@@ -21,7 +19,6 @@ if(previousSessionAccumulatedSeconds){
     savedPreviousSeconds = previousSessionAccumulatedSeconds
 }
 
-
 const padDigits = (value) => {
     if(value < 10){
         return '0'+value;
@@ -31,10 +28,9 @@ const padDigits = (value) => {
 }
 
 const formatSeconds = (total) => {
-    const hours = Math.floor(total/60/60);
-    const minutes = Math.floor( (total - (hours*60*60)) / 60 );
-    const seconds = total - minutes*60 - hours * 60 * 60;
-    return `${padDigits(hours)}:${padDigits(minutes)}:${padDigits(seconds)}`;
+    const minutes = Math.floor( total / 60 );
+    const seconds = total - minutes*60;
+    return `${minutes}:${padDigits(seconds)}`;
 }
 
 const getAccumulatedSeconds = (newerTime, olderTime) => {
@@ -55,6 +51,7 @@ document.querySelector('h1').innerHTML = formatSeconds(savedPreviousSeconds);
 document.querySelector('.btn-primary').addEventListener('click', (event) => {
     startTime = Date.now();
     running = true;
+    document.querySelector('body').classList.add('running');
     document.querySelector('.btn-primary').disabled=true;
     document.querySelector('.btn-secondary').disabled=false;
     document.querySelector('.btn-danger').disabled=true;
@@ -64,6 +61,7 @@ document.querySelector('.btn-primary').addEventListener('click', (event) => {
 document.querySelector('.btn-secondary').addEventListener('click', (event) => {
     updateSavedPreviousSeconds();
     running = false;
+    document.querySelector('body').classList.remove('running');
     document.querySelector('.btn-primary').disabled=false;
     document.querySelector('.btn-secondary').disabled=true;
     document.querySelector('.btn-danger').disabled=false;
@@ -76,10 +74,10 @@ document.querySelector('.btn-danger').addEventListener('click', (event) => {
     document.querySelector('.btn-danger').disabled=true;
 })
 
-window.onbeforeunload = function(){
-    if(running){
-        updateSavedPreviousSeconds();
-    }
-    window.localStorage.setItem('savedPreviousSeconds', savedPreviousSeconds);
-    return 'Good bye';
-}
+// window.onbeforeunload = function(){
+//     if(running){
+//         updateSavedPreviousSeconds();
+//     }
+//     window.localStorage.setItem('savedPreviousSeconds', savedPreviousSeconds);
+//     return 'Good bye';
+// }

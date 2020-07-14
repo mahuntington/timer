@@ -1,0 +1,53 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-size: 10vw;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.running {
+    background: lightgreen;
+}
+
+main {
+    width:75%;
+}
+
+button {
+    font-size:0.5em;
+    padding:1em;
+    border-radius: 0.5em;
+    color:white;
+}
+
+h1 {
+    text-align: center;
+}
+
+.btn-primary {
+    background: blue;
+}
+
+.btn-primary:disabled {
+    background: lightblue;
+}
+
+.btn-secondary {
+    background: grey;
+}
+
+.btn-secondary:disabled {
+    background: darkgrey;
+}
+
+.btn-danger {
+    background: red;
+}
+.btn-danger:disabled {
+    background: lightpink;
+}
