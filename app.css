@@ -18,36 +18,53 @@ main {
     width:75%;
 }
 
+main section {
+    display: flex;
+    justify-content: center;
+}
+
 button {
     font-size:0.5em;
     padding:1em;
+    margin:0.1em;
     border-radius: 0.5em;
     color:white;
+    width:30%;
+    box-sizing: border-box;
 }
 
-h1 {
+button:not(:disabled){
+    cursor: pointer;
+}
+
+code {
+    margin: 0;
+    display: block;
     text-align: center;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 2em;
 }
 
-.btn-primary {
+#start {
     background: blue;
 }
 
-.btn-primary:disabled {
+#start:disabled {
     background: lightblue;
 }
 
-.btn-secondary {
+#stop {
     background: grey;
 }
 
-.btn-secondary:disabled {
+#stop:disabled {
     background: darkgrey;
 }
 
-.btn-danger {
+#reset {
     background: red;
 }
-.btn-danger:disabled {
+#reset:disabled {
     background: lightpink;
 }

@@ -39,39 +39,39 @@ const getAccumulatedSeconds = (newerTime, olderTime) => {
 
 const displayTime = () => {
     const totalSeconds = getAccumulatedSeconds(Date.now(),startTime) + savedPreviousSeconds;
-    document.querySelector('h1').innerHTML = formatSeconds(totalSeconds);
+    document.querySelector('code').innerHTML = formatSeconds(totalSeconds);
 }
 
 const updateSavedPreviousSeconds = () => {
     savedPreviousSeconds += getAccumulatedSeconds(Date.now(), startTime);
 }
 
-document.querySelector('h1').innerHTML = formatSeconds(savedPreviousSeconds);
+document.querySelector('code').innerHTML = formatSeconds(savedPreviousSeconds);
 
-document.querySelector('.btn-primary').addEventListener('click', (event) => {
+document.querySelector('#start').addEventListener('click', (event) => {
     startTime = Date.now();
     running = true;
     document.querySelector('body').classList.add('running');
-    document.querySelector('.btn-primary').disabled=true;
-    document.querySelector('.btn-secondary').disabled=false;
-    document.querySelector('.btn-danger').disabled=true;
+    document.querySelector('#start').disabled=true;
+    document.querySelector('#stop').disabled=false;
+    document.querySelector('#reset').disabled=true;
     windowInterval = window.setInterval(displayTime,1000)
 })
 
-document.querySelector('.btn-secondary').addEventListener('click', (event) => {
+document.querySelector('#stop').addEventListener('click', (event) => {
     updateSavedPreviousSeconds();
     running = false;
     document.querySelector('body').classList.remove('running');
-    document.querySelector('.btn-primary').disabled=false;
-    document.querySelector('.btn-secondary').disabled=true;
-    document.querySelector('.btn-danger').disabled=false;
+    document.querySelector('#start').disabled=false;
+    document.querySelector('#stop').disabled=true;
+    document.querySelector('#reset').disabled=false;
     window.clearInterval(windowInterval)
 })
 
-document.querySelector('.btn-danger').addEventListener('click', (event) => {
+document.querySelector('#reset').addEventListener('click', (event) => {
     savedPreviousSeconds = 0;
-    document.querySelector('h1').innerHTML = formatSeconds(0);
-    document.querySelector('.btn-danger').disabled=true;
+    document.querySelector('code').innerHTML = formatSeconds(0);
+    document.querySelector('#reset').disabled=true;
 })
 
 window.onbeforeunload = function(){
