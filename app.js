@@ -1,12 +1,12 @@
 /* TODOs
 - enable reset on load if there is saved time from before
-- display previous entries
 - display how many 5/10min blocks have passed
+- deploy
+- display previous entries
 - set alarm for after certain times have passed
 - pause when not playing with audio api
-- deploy
 - cleanup
-- hook up practice log
+- hook up practice log or build it in
 */
 
 let startTime = 0;
