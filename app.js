@@ -1,5 +1,6 @@
 /* TODOs
 - enable reset on load if there is saved time from before
+- start/stop with spacebar
 - display how many 5/10min blocks have passed
 - deploy
 - display previous entries
