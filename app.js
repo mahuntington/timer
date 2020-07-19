@@ -1,13 +1,24 @@
-/* TODOs
+/*
+
+===== TODOs =====
+
+MVP
+
 - enable reset on load if there is saved time from before
-- start/stop with spacebar
 - display how many 5/10min blocks have passed
-- deploy
-- display previous entries
+- start/stop with spacebar
+- don't confirm close if time displayed is 0
 - set alarm for after certain times have passed
-- pause when not playing with audio api
 - cleanup
+- deploy
+
+Extras
+
+- display previous entries (build API that saves in DB)
+- auth (normal + google/twitter/facebook/apple/spotify sign in)
+- use audo api to pause when no sound is detected
 - hook up practice log or build it in
+
 */
 
 let startTime = 0;
