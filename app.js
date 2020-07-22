@@ -4,7 +4,6 @@
 
 MVP
 
-- enable reset on load if there is saved time from before
 - display how many 5/10min blocks have passed
 - start/stop with spacebar
 - don't confirm close if time displayed is 0
@@ -59,6 +58,9 @@ const updateSavedPreviousSeconds = () => {
 }
 
 document.querySelector('code').innerHTML = formatSeconds(savedPreviousSeconds);
+if(savedPreviousSeconds !== 0){
+    document.querySelector('#reset').disabled=false;
+}
 
 document.querySelector('#start').addEventListener('click', (event) => {
     startTime = Date.now();
