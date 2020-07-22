@@ -5,7 +5,6 @@
 MVP
 
 - display how many 5/10min blocks have passed
-- start/stop with spacebar
 - don't confirm close if time displayed is 0
 - set alarm for after certain times have passed
 - cleanup
@@ -53,6 +52,26 @@ const displayTime = () => {
     document.querySelector('code').innerHTML = formatSeconds(totalSeconds);
 }
 
+const start = (event) => {
+    startTime = Date.now();
+    running = true;
+    document.querySelector('body').classList.add('running');
+    document.querySelector('#start').disabled=true;
+    document.querySelector('#stop').disabled=false;
+    document.querySelector('#reset').disabled=true;
+    windowInterval = window.setInterval(displayTime,1000)
+};
+
+const stop = (event) => {
+    updateSavedPreviousSeconds();
+    running = false;
+    document.querySelector('body').classList.remove('running');
+    document.querySelector('#start').disabled=false;
+    document.querySelector('#stop').disabled=true;
+    document.querySelector('#reset').disabled=false;
+    window.clearInterval(windowInterval)
+};
+
 const updateSavedPreviousSeconds = () => {
     savedPreviousSeconds += getAccumulatedSeconds(Date.now(), startTime);
 }
@@ -62,30 +81,24 @@ if(savedPreviousSeconds !== 0){
     document.querySelector('#reset').disabled=false;
 }
 
-document.querySelector('#start').addEventListener('click', (event) => {
-    startTime = Date.now();
-    running = true;
-    document.querySelector('body').classList.add('running');
-    document.querySelector('#start').disabled=true;
-    document.querySelector('#stop').disabled=false;
-    document.querySelector('#reset').disabled=true;
-    windowInterval = window.setInterval(displayTime,1000)
-})
+document.querySelector('#start').addEventListener('click', start)
 
-document.querySelector('#stop').addEventListener('click', (event) => {
-    updateSavedPreviousSeconds();
-    running = false;
-    document.querySelector('body').classList.remove('running');
-    document.querySelector('#start').disabled=false;
-    document.querySelector('#stop').disabled=true;
-    document.querySelector('#reset').disabled=false;
-    window.clearInterval(windowInterval)
-})
+document.querySelector('#stop').addEventListener('click', stop)
 
 document.querySelector('#reset').addEventListener('click', (event) => {
     savedPreviousSeconds = 0;
     document.querySelector('code').innerHTML = formatSeconds(0);
     document.querySelector('#reset').disabled=true;
+})
+
+document.querySelector('body').addEventListener('keyup', (event) => {
+    if(event.keyCode === 32){
+        if(running){
+            stop();
+        } else {
+            start();
+        }
+    }
 })
 
 window.onbeforeunload = function(){
