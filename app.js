@@ -98,7 +98,8 @@ document.querySelector('#stop').addEventListener('click', stop)
 
 document.querySelector('#reset').addEventListener('click', (event) => {
     savedPreviousSeconds = 0;
-    document.querySelector('code').innerHTML = formatSeconds(0);
+    document.querySelector('code').innerHTML = formatSeconds(savedPreviousSeconds);
+    document.querySelector('small').innerHTML = formatMinuteBlocks(savedPreviousSeconds);
     document.querySelector('#reset').disabled=true;
 })
 
