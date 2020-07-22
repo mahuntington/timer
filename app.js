@@ -5,7 +5,6 @@
 MVP
 
 - display how many 5/10min blocks have passed
-- don't confirm close if time displayed is 0
 - set alarm for after certain times have passed
 - cleanup
 - deploy
@@ -106,5 +105,7 @@ window.onbeforeunload = function(){
         updateSavedPreviousSeconds();
     }
     window.localStorage.setItem('savedPreviousSeconds', savedPreviousSeconds);
-    return 'Good bye';
+    if(savedPreviousSeconds > 0){
+        return 'Good bye';
+    }
 }
