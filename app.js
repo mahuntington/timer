@@ -4,13 +4,12 @@
 
 MVP
 
-- display how many 5/10min blocks have passed
-- set alarm for after certain times have passed
 - cleanup
 - deploy
 
 Extras
 
+- set alarm for after certain times have passed
 - display previous entries (build API that saves in DB)
 - auth (normal + google/twitter/facebook/apple/spotify sign in)
 - use audo api to pause when no sound is detected
@@ -36,10 +35,21 @@ const padDigits = (value) => {
     }
 }
 
+const getMinutes = (seconds) => {
+    return Math.floor( seconds / 60 );
+}
+
 const formatSeconds = (total) => {
-    const minutes = Math.floor( total / 60 );
+    const minutes = getMinutes(total);
     const seconds = total - minutes*60;
     return `${minutes}:${padDigits(seconds)}`;
+}
+
+const formatMinuteBlocks = (seconds) => {
+    const minutes = getMinutes(seconds);
+    const fiveMins = Math.floor(minutes/5);
+    const tenMins = Math.floor(minutes/10);
+    return `5 minute blocks: ${fiveMins}<br/>  10 minute blocks: ${tenMins}`;
 }
 
 const getAccumulatedSeconds = (newerTime, olderTime) => {
@@ -49,6 +59,7 @@ const getAccumulatedSeconds = (newerTime, olderTime) => {
 const displayTime = () => {
     const totalSeconds = getAccumulatedSeconds(Date.now(),startTime) + savedPreviousSeconds;
     document.querySelector('code').innerHTML = formatSeconds(totalSeconds);
+    document.querySelector('small').innerHTML = formatMinuteBlocks(totalSeconds);
 }
 
 const start = (event) => {
@@ -76,6 +87,7 @@ const updateSavedPreviousSeconds = () => {
 }
 
 document.querySelector('code').innerHTML = formatSeconds(savedPreviousSeconds);
+document.querySelector('small').innerHTML = formatMinuteBlocks(savedPreviousSeconds);
 if(savedPreviousSeconds !== 0){
     document.querySelector('#reset').disabled=false;
 }

@@ -46,6 +46,12 @@ code {
     font-size: 2em;
 }
 
+small {
+    font-size: 0.2em;
+    text-align: center;
+    display: block;
+}
+
 #start {
     background: blue;
 }
