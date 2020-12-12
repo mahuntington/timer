@@ -1,6 +1,9 @@
 /*
 
 ===== TODOs =====
+BUGS
+
+- start timer, try to close window, escapre from confirm dialog (adds about 12mins to time)
 
 MVP
 
