@@ -91,7 +91,7 @@ const updateSavedPreviousSeconds = () => {
 
 const postToAPI = ()=>{
 	if(savedPreviousSeconds > 0){
-		fetch('http://localhost:8000/api/sessions',{
+		fetch('https://shrouded-depths-07664.herokuapp.com/api/sessions',{
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
