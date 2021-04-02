@@ -89,6 +89,18 @@ const updateSavedPreviousSeconds = () => {
     savedPreviousSeconds += getAccumulatedSeconds(Date.now(), startTime);
 }
 
+const postToAPI = ()=>{
+	if(savedPreviousSeconds > 0){
+		fetch('http://localhost:8000/api/sessions',{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({seconds:savedPreviousSeconds})
+		});
+	}
+}
+
 document.querySelector('code').innerHTML = formatSeconds(savedPreviousSeconds);
 document.querySelector('small').innerHTML = formatMinuteBlocks(savedPreviousSeconds);
 if(savedPreviousSeconds !== 0){
@@ -100,6 +112,7 @@ document.querySelector('#start').addEventListener('click', start)
 document.querySelector('#stop').addEventListener('click', stop)
 
 document.querySelector('#reset').addEventListener('click', (event) => {
+	postToAPI();
     savedPreviousSeconds = 0;
     document.querySelector('code').innerHTML = formatSeconds(savedPreviousSeconds);
     document.querySelector('small').innerHTML = formatMinuteBlocks(savedPreviousSeconds);
@@ -122,6 +135,7 @@ window.onbeforeunload = function(){
     }
     window.localStorage.setItem('savedPreviousSeconds', savedPreviousSeconds);
     if(savedPreviousSeconds > 0){
+		postToAPI();
         return 'Good bye';
     }
 }
