@@ -52,7 +52,7 @@ const formatMinuteBlocks = (seconds) => {
 	const minutes = getMinutes(seconds);
 	const fiveMins = Math.floor(minutes/5);
 	const tenMins = Math.floor(minutes/10);
-	return `5 minute blocks: ${fiveMins}<br/>  10 minute blocks: ${tenMins}`;
+	return `seconds: ${seconds}<br/> 5 minute blocks: ${fiveMins}<br/>  10 minute blocks: ${tenMins}`;
 }
 
 const getAccumulatedSeconds = (newerTime, olderTime) => {
