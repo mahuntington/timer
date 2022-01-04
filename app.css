@@ -10,7 +10,7 @@ body {
     display: flex;
     justify-content: center;
 	background:black;
-	color: whitesmoke;
+	color: #e0e0e0;
     align-items: center;
 }
 
@@ -32,7 +32,7 @@ button {
     padding:1em;
     margin:0.1em;
     border-radius: 0.5em;
-    color:white;
+	color:whitesmoke;
     width:30%;
     box-sizing: border-box;
 }
